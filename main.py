@@ -24,7 +24,7 @@ class ImageResize:
             h, w, d = image.shape
             print(image.shape)
 
-            dimension = (int(w*ratio), int(h*ratio))
+            dimension = (int(w * ratio), int(h * ratio))
             resized_image = cv2.resize(image, dimension, interpolation=cv2.INTER_CUBIC)
             print(resized_image.shape)
 
@@ -84,15 +84,15 @@ class GUI:
             width=32
         ).place(x=125, y=70)
 
-        def clear_button():
-            file_location = filedialog.askdirectory(initialdir='/home/arabind', title='Select Folder')
+        def find_folder():
+            file_location = filedialog.askdirectory(initialdir='/home', title='Select Folder')
             folder.set(file_location)
 
         Button(
             root,
             text='...',
             font=('bitstream vera sans', 12),
-            command=clear_button
+            command=find_folder
         ).place(x=455, y=65)
 
         ttk.Separator(root).place(y=125, relwidth=1)
@@ -119,7 +119,10 @@ class GUI:
         ).place(x=160, y=225)
 
         def convert_ratio():
-            ImageResize.image_resize_ratio(folder.get(), float(ratio.get()))
+            ImageResize.image_resize_ratio(
+                folder.get(),
+                float(ratio.get())
+            )
 
         Button(
             root,
@@ -161,7 +164,11 @@ class GUI:
         ).place(x=280, y=400)
 
         def convert_pixel():
-            ImageResize.image_resize_pixel(folder.get(), int(width.get()), int(height.get()))
+            ImageResize.image_resize_pixel(
+                folder.get(),
+                int(width.get()),
+                int(height.get()),
+            )
 
         Button(
             root,
@@ -170,6 +177,7 @@ class GUI:
             command=convert_pixel
         ).place(x=390, y=395)
 
+        ttk.Separator(root).place(y=500, relwidth=1)
         root.mainloop()
 
 
